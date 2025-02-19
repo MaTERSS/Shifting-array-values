@@ -14,13 +14,14 @@ namespace CShraplight
             int elements = 15;
             int minValue = 0;
             int maxValue = 31;
+            int divider = 2;
             int[] numbers = new int[elements];
 
-            Random rand = new Random();
+            Random random = new Random();
 
             for (int i = 0; i < elements; i++)
             {
-                numbers[i] = rand.Next(minValue, maxValue); 
+                numbers[i] = random.Next(minValue, maxValue); 
             }
 
             Console.WriteLine("Исходный массив:");
@@ -34,27 +35,20 @@ namespace CShraplight
 
             Console.Write("Введите количество позиций для сдвига: ");
             int positionsForShift = int.Parse(Console.ReadLine());
-            positionsForShift = positionsForShift % numbers.Length;         
+            positionsForShift %= numbers.Length;         
             
-            for (int i = 0; i < numbers.Length / 2; i++)
+            for (int i = 0; i < numbers.Length / divider; i++)
             {
                 int temp = numbers[i];
                 numbers[i] = numbers[numbers.Length - 1 - i];
                 numbers[numbers.Length - 1 - i] = temp;
             }
 
-            for (int i = 0; i < (numbers.Length - positionsForShift) / 2; i++)
+            for (int i = 0; i < (numbers.Length - positionsForShift) / divider; i++)
             {
                 int temp = numbers[i];
                 numbers[i] = numbers[numbers.Length - positionsForShift - 1 - i];
                 numbers[numbers.Length - positionsForShift - 1 - i] = temp;
-            }
-
-            for (int i = 0; i < positionsForShift / 2; i++)
-            {
-                int temp = numbers[numbers.Length - positionsForShift + i];
-                numbers[numbers.Length - positionsForShift + i] = numbers[numbers.Length - 1 - i];
-                numbers[numbers.Length - 1 - i] = temp;
             }
 
             Console.WriteLine("Массив после сдвига:");
